@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  kafka_mysql:
+    image: mysql:5.7.30
+    container_name: kafka_mysql
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - "/home/znznzn707/containers/mysql/db:/var/lib/mysql"
+      - "/home/znznzn707/containers/mysql/conf:/etc/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_ROOT
+      - MYSQL_USER=Aria
+      - MYSQL_PASS=Aria
+    networks:
+    - kafka_net-kafka
+networks:
+  kafka_net-kafka: 
+    external: true

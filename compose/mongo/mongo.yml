@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Aria
+      MONGO_INITDB_ROOT_PASSWORD: Aria_O
+    volumes: 
+    - "/home/znznzn707/containers/mongo/db:/data/db"
+    - "/home/znznzn707/containers/mongo/configdb:/data/configdb"
+    ports:
+    - 27017:27017
+    networks:
+    - net_mongo
+
+networks:
+  net_mongo:
+    driver: bridge

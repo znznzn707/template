@@ -1,0 +1,22 @@
+version: '3'
+services:
+  vsftpd:
+    image: shourai/vsftpd-alpine:latest
+    container_name: vsftp
+    environment:
+      - FTP_USER=anon        #自定义用户名
+      - FTP_PASS=qve780       #自定义用户密码 
+      - PASV_ENABLE=YES
+      - PASV_ADDRESS=192.168.101.100    #宿主机的IP
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=21110
+      - ANON_ENABLE=NO
+      - NO_ANON_PASSWD=NO
+      - ANON_ROOT=/var/ftp
+    volumes:
+      - /home/znznzn707/ftp:/home/anon    #与FTP_USER保持一致,即$FTP_USER的值是什么此处的目录就是什么
+    ports:
+      - "20:20"
+      - "21:21"
+      - "21100-21110:21100-21110"
+    restart: always

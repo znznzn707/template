@@ -1,0 +1,32 @@
+version: '3'
+services:
+  master:
+    image: redis
+    container_name: redis-master
+    ports:
+    - 6379:6379
+    command: redis-server --requirepass 123456
+    networks:
+    - redis_net
+
+  slave1:
+    image: redis
+    container_name: redis-slave1
+    ports:
+    - 6380:6379
+    command: redis-server --slaveof redis-master 6379 --requirepass 123456 --masterauth 123456
+    networks:
+    - redis_net
+
+  slave2:
+    image: redis
+    container_name: redis-slave2
+    ports:
+    - 6381:6379
+    command: redis-server --slaveof redis-master 6379 --requirepass 123456 --masterauth 123456
+    networks:
+    - redis_net
+
+networks:
+  redis_net: 
+    driver: bridge
